@@ -1,0 +1,95 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage,enumitem,amsmath,amssymb,graphicx,grffile,float,listings}
+
+
+
+\begin{document}
+    %Title Section
+    \begin{flushleft}
+	\LARGE Dynamical Systems: \\
+	Linearization, Equilibrium Points \& Stability
+    \end{flushleft} 
+    \rule{\linewidth}{0.4pt}
+    %Title Section
+
+    %Problem and Solution
+
+    \section*{Equilibrium Points}
+
+	Consider the following nonlinear system:
+        $$\dot q_1 = aq_1 - bq_1q_2$$
+		$$\dot q_2 = bq_1q_2-cq_2$$
+	where $q_1, q_2 \geq 0$ and $a, b, c \geq 0$ are positive constants.
+	This can be represented as:
+		$$\frac{dx}{dt} = f(x) \text{;}$$	
+		$$x = \begin{bmatrix} q_1 \\ q_2 \end{bmatrix}$$
+		$$\frac{dx}{dt} = \begin{bmatrix} \dot q_1 \\ \dot q_2 \end{bmatrix}$$
+		$$f(x) = \begin{bmatrix} aq_1 - bq_1q_2 \\ bq_1q_2-cq_2 \end{bmatrix}$$
+	Equilibrium points occur when our system does not change with time. This occurs when:
+		$$\dot q_1 = 0$$
+		$$\dot q_2 = 0$$
+	Therefore, equilibrium points occur when:
+		$$q_1 (a-bq_2) = 0$$
+		$$q_2 (bq_1-c) = 0$$
+	We can solve and show that there are two equilbrium points:
+	\begin{itemize}
+		\item Equilibrium Point 1: 
+			$$q_1=0 \text{ , } q_2=0 $$
+
+		\item Equilibrium Point 2: 
+			$$q_1= \frac{c}{b} \text{ , } q_2= \frac{a}{b}$$
+	\end{itemize}
+
+	\newpage
+
+	\section*{Jacobian Linearization Around an Equilibrium Point}
+	
+	The Jacobian linearization of our nonlinear system is:
+		$$\frac{dx}{dt} = Ax$$
+	where $A$ is the Jacobian of our matrix $f(x)$.
+	Let $f_1 = \dot q_1$, $f_2 = \dot q_2$, and $x = \begin{bmatrix} q_1 \\ q_2 \end{bmatrix}$.
+
+		$$A = \frac{\partial f}{\partial x} =
+		\begin{bmatrix}
+		\frac{\partial f_1}{\partial q_1} &	\frac{\partial f_1}{\partial q_2} \\
+		\\
+		\frac{\partial f_2}{\partial q_1} &	\frac{\partial f_2}{\partial q_2}
+		\end{bmatrix}$$
+		
+	\begin{itemize}
+		\item Evaluate at Equilibrium Point \#1:
+	
+			$$A = \begin{bmatrix} a-bq_2 & -bq_1 \\ bq_2 & bq_1-c \end{bmatrix} $$
+
+			At Equilibrium Point 1, $q_1 = 0$ and $q_2 = 0$.
+
+				$$A = \begin{bmatrix} a & 0 \\ 0 & -c \end{bmatrix} $$
+				$$det(A-\lambda I) = 0$$
+
+			Therefore, $\lambda_1 = a$ and $\lambda_2 = -c$.
+			Since $\lambda_1$ is positive, the system is unstable around equilibrium point \#1.
+
+		\item Evaluate at Equilibrium Point \#2:
+			$$A = \begin{bmatrix} a-bq_2 & -bq_1 \\ bq_2 & bq_1-c \end{bmatrix} $$
+
+			At Equilibrium Point 2, $q_1 = \frac{c}{b}$ and $q_2 = \frac{a}{b}$.
+				$$A = \begin{bmatrix} 0 & -c \\ a & 0 \end{bmatrix} $$
+				$$det(A-\lambda I) = 0$$
+
+			Therefore, $\lambda_1 = +i\sqrt{ac}$ and $\lambda_2 = -i\sqrt{ac}$. Since $\lambda_1$ and $\lambda_2$ are complex conjugates, the system is marginally stable around this equilibrium point.
+	\end{itemize}
+
+	\newpage
+
+	\section*{Simulation of System}
+
+	Choosing arbitrary constants $a, b, c$, we can simulate the response of this system for varying initial conditions. We choose a small time step, $\Delta t$, and assume that $f$ is constant during the interval. Under these assumptions, $q$ can be iteratively updated by
+	$$q_{t + \Delta t} = q_t + \Delta t \dot{q_t} = q_t + \Delta t f(q)$$
+	We choose a step size of $\Delta T = 0.1$, set constants $a = b = c = 1$, and plot the trajectory of $q_1$ vs $q_2$ over 20s for the following initial conditions:
+	\begin{itemize}
+		\item $q_1 = 1$, $q_2 = 3$
+		\item $q_1 = 1.1$, $q_2 = 1$
+		\item $q_1 = 1$, $q_2 = 1.5$
+	\end{itemize}
+
+\end{document}
