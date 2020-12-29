@@ -44,7 +44,7 @@
 
 	\section*{Jacobian Linearization Around an Equilibrium Point}
 	
-	The Jacobian linearization of our nonlinear system is:
+	If we want to study the local behavior of our system close to an equilibrium point, the nonlinear perturbations (higher-order) can be ignored as they are small in comparison to the lower-order linear terms that are derived via Taylor series expansion. Therefore, the Jacobian linearization of our nonlinear system is:
 		$$\frac{dx}{dt} = Ax$$
 	where $A$ is the Jacobian of our matrix $f(x)$.
 	Let $f_1 = \dot q_1$, $f_2 = \dot q_2$, and $x = \begin{bmatrix} q_1 \\ q_2 \end{bmatrix}$.
@@ -85,7 +85,7 @@
 
 	Choosing arbitrary constants $a, b, c$, we can simulate the response of this system for varying initial conditions. We choose a small time step, $\Delta t$, and assume that $f$ is constant during the interval. Under these assumptions, $q$ can be iteratively updated by
 	$$q_{t + \Delta t} = q_t + \Delta t \dot{q_t} = q_t + \Delta t f(q)$$
-	We choose a step size of $\Delta T = 0.1$, set constants $a = b = c = 1$, and plot the trajectory of $q_1$ vs $q_2$ over 20s for the following initial conditions:
+	We choose a step size of $\Delta t = 0.1$, set constants $a = b = c = 1$, and plot the trajectory of $q_1$ vs $q_2$ over 20s for the following initial conditions:
 	\begin{itemize}
 		\item $q_1 = 1$, $q_2 = 3$
 		\item $q_1 = 1.1$, $q_2 = 1$
